@@ -11,7 +11,7 @@ const Login = () => {
     }
     let  submit=(x)=>{
       x.preventDefault()
-      
+        
       console.log(name,password);
     }
   return (
