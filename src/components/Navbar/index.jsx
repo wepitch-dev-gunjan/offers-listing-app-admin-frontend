@@ -13,9 +13,25 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useState} from "react"
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{
+  id: 1,
+  name: "Offers",
+  link: "/offers"
+},
+{
+  id: 2,
+  name: "Brands",
+  link: "/brands"
+},
+{
+  id: 3,
+  name: "Users",
+  link: "/users"
+},
+];
+const settings = [ 'Logout'];
 
 const  Navbar=()=> {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -55,7 +71,7 @@ const  Navbar=()=> {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            OLA
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -87,11 +103,14 @@ const  Navbar=()=> {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page) => {  
+                return(
+
+                  <MenuItem onClick={handleCloseNavMenu}>
+                  <Link to={page.link}>{page.name}</Link>
                 </MenuItem>
-              ))}
+                  )              
+})}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -115,13 +134,19 @@ const  Navbar=()=> {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+              <Link
+              style={{textDecoration:"none"}}
+              to={page.link}>
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', }}
+                style={{textDecoration:"none"}}
               >
-                {page}
+                  {page.name}
+                
               </Button>
+              </Link>
             ))}
           </Box>
 

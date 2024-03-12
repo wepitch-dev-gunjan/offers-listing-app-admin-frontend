@@ -1,0 +1,67 @@
+.Offers-container{
+    .add-offers-btn{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 12px;
+        .add{
+            color: white;
+            padding: 12px;
+            width: 5%;
+            display: flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(48, 80, 219);
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+    .offers{
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    
+    .row{
+        width: 100%;
+        display: flex;
+        gap: 32px;
+        border: none;
+    }
+    .offer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;    
+        padding: 32px;
+        gap: 20px;
+        background-color: whitesmoke;  
+
+        .offer-image{
+            img{
+               width: 10vw;
+            }
+        }
+        .offer-details{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+        }
+        .offer-view{
+            width: 100%;
+            background-color: rgb(48, 80, 219);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 12px;
+        }
+    }
+}
+}
