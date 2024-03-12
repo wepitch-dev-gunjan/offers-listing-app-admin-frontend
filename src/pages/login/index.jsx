@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import login from "./style.scss";
-const Login = () => {
+import { UserContext } from "../../contexts/User";
+import { useNavigate } from "react-router-dom";
+
+const Login = ({ setLoggedIn }) => {
   let [name, setName] = useState();
+  const navigate = useNavigate();
+
   let updateName = (x) => {
     setName(x.target.value);
   };
@@ -11,7 +16,8 @@ const Login = () => {
   };
   let submit = (x) => {
     x.preventDefault();
-
+    navigate("/offers");
+    setLoggedIn((prev) => !prev);
     console.log(name, password);
   };
   return (
