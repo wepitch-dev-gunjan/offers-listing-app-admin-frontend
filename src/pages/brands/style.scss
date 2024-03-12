@@ -28,6 +28,7 @@
     .col{
         width: 100%;
         display: flex;
+        gap: 12px;
     }
     .brand{
         display: flex;
@@ -35,7 +36,7 @@
         align-items: center;   
         width: 100%; 
         background-color: whitesmoke;  
-
+        padding: 12px;
         .brand-image{
             img{
                height: 20vh;
@@ -45,10 +46,11 @@
         .brand-details{
          display: flex;
          flex-direction: column;
-         padding: 0px 40px;
+         gap: 12px;
+         padding: 0px 52px;
         }
         .brand-view{
-            width: 10%;
+            width: 15%;
             background-color: rgb(48, 80, 219);
             color: white;
             display: flex;
