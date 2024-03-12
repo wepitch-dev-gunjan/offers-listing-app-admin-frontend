@@ -29,7 +29,7 @@
     .row{
         width: 100%;
         display: flex;
-        gap: 32px;
+        gap: 44px;
         border: none;
     }
     .offer{
@@ -38,9 +38,9 @@
         justify-content: center;
         align-items: center;    
         padding: 32px;
-        gap: 20px;
-        background-color: whitesmoke;  
-
+        gap: 40px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        border-radius: 20px;
         .offer-image{
             img{
                width: 10vw;
