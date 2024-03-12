@@ -1,4 +1,4 @@
-/* * {
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -49,7 +49,7 @@ form {
   transform: translate(-50%, -50%);
 }
 
-.form {
+/* .form {
   height: 420px;
   width: 800px;
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
@@ -64,7 +64,7 @@ form {
   position: absolute;
   top: 50%;
   left: 50%;
-}
+} */
 form * {
   font-family: "Poppins", sans-serif;
   color: #ffffff;
@@ -139,5 +139,5 @@ p {
   font-weight: 300;
   font-size: 12px;
   margin-left: 210px;
-  /* color: white; */
-/* } */
+  color: white;
+}

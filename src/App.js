@@ -7,13 +7,16 @@ import Navbar from "./components/Navbar";
 import Users from "./pages/users";
 import "./style.scss";
 import AddOffer from "./components/addOffers";
+import AddBrand from "./components/addBrands";
 
 const App = () => {
   const [addOfferClicked, setAddOfferClicked] = useState(false);
+  const [addBrandClicked, setAddBrandClicked] = useState(false);
 
   return (
     <>
       {addOfferClicked && <AddOffer />}
+      {addBrandClicked && <AddBrand />}
       <div className="navbar" style={{ position: "sticky", top: 0 }}>
         <Navbar />
       </div>
@@ -29,7 +32,15 @@ const App = () => {
               />
             }
           />
-          <Route path="/brands" element={<Brands />} />
+          <Route
+            path="/brands"
+            element={
+              <Brands
+                addBrandClicked={addBrandClicked}
+                setAddBrandClicked={setAddBrandClicked}
+              />
+            }
+          />
           <Route path="/users" element={<Users />} />
         </Routes>
       </div>
