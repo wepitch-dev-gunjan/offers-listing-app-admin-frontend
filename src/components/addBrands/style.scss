@@ -5,6 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.604);    
 
     .add-brand{
         background-color: whitesmoke;

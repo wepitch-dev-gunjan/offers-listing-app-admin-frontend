@@ -18,7 +18,7 @@ const App = () => {
   return (
     <>
       {addOfferClicked && <AddOffer setAddOfferClicked={setAddOfferClicked} />}
-      {addBrandClicked && <AddBrand />}
+      {addBrandClicked && <AddBrand setAddBrandClicked={setAddBrandClicked} />}
       <div className="navbar" style={{ position: "sticky", top: 0 }}>
         {loggedIn && <Navbar setLoggedIn={setLoggedIn} />}
       </div>

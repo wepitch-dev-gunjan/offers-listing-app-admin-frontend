@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useClickOutside from '../../customHooks/useClickOutside';
 import './style.scss'
 
-const AddBrand = () => {
+const AddBrand = ({setAddBrandClicked}) => {
     const [heading, setHeading] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
+    const Ref = useRef(null);
     const [image, setImage] = useState(null);
+
+    useClickOutside(Ref, () => setAddBrandClicked(false));
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -17,7 +21,7 @@ const AddBrand = () => {
         <div className="AddBrand-container">
             <div className="add-brand">
 
-        <form onSubmit={handleSubmit}>
+        <form ref={Ref} onSubmit={handleSubmit}>
             <label>
                 Heading:
                 <input type="text" value={heading} onChange={(e) => setHeading(e.target.value)} />
