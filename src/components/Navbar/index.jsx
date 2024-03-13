@@ -51,10 +51,13 @@ const Navbar = ({ setLoggedIn }) => {
   };
 
   const handleCloseUserMenu = () => {
-    setLoggedIn((prev) => !prev);
-    navigate("/login");
     setAnchorElUser(null);
   };
+  const logout=()=>{
+    navigate("/login");
+    setLoggedIn((prev) => !prev);
+
+  }
 
   return (
     <div style={{ background: "white" }}>
@@ -174,7 +177,7 @@ const Navbar = ({ setLoggedIn }) => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography onClick={logout}  textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
