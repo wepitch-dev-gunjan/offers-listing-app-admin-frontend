@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.scss'
+import useClickOutside from '../../customHooks/useClickOutside';
 
 const AddOffer = () => {
     const [heading, setHeading] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
     const [image, setImage] = useState(null);
+    const Ref = useRef(null);
+
+    // useClickOutside(Ref, () => setAd(false));
 
     const handleSubmit = (event) => {
         event.preventDefault();

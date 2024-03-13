@@ -52,7 +52,7 @@ const Navbar = ({ setLoggedIn }) => {
 
   const handleCloseUserMenu = () => {
     setLoggedIn((prev) => !prev);
-    navigate("/");
+    navigate("/login");
     setAnchorElUser(null);
   };
 
