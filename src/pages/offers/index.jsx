@@ -3,6 +3,7 @@ import "./style.scss";
 import { CiShare1 } from "react-icons/ci";
 
 const Offers = ({ addOfferClicked, setAddOfferClicked }) => {
+
   return (
     <div className="Offers-container">
       <div className="add-offers-btn">
