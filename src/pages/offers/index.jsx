@@ -3,6 +3,7 @@ import "./style.scss";
 import { CiShare1 } from "react-icons/ci";
 
 const Offers = ({ addOfferClicked, setAddOfferClicked }) => {
+<<<<<<< HEAD
   let img =
     "https://img.freepik.com/free-vector/sale-offer-label-banner-discount-offer-promotion_157027-1250.jpg";
   let para =
@@ -15,6 +16,9 @@ const Offers = ({ addOfferClicked, setAddOfferClicked }) => {
     { id: 5, img: img, heading: "Offer Heading", para: para },
     { id: 6, img: img, heading: "Offer Heading", para: para },
   ];
+=======
+
+>>>>>>> 933d136e261b8e4ef1b7df1f09f3273c0edac272
   return (
     <div className="Offers-container">
       <div className="add-offers-btn">

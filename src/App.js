@@ -24,7 +24,7 @@ const App = () => {
       </div>
       <div style={{ padding: "0px" }}>
         <Routes>
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
+          <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route
             path="/offers"
             element={
