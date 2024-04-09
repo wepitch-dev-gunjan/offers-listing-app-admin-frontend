@@ -1,68 +1,74 @@
-.Offers-container{
-    .add-offers-btn{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        .add{
-            color: white;
-            padding: 12px;
-            width: 7%;
-            display: flex;
-            cursor: pointer;
-            justify-content: center;
-            align-items: center;
-            background-color: rgb(48, 80, 219);
-            &:hover{
-                text-decoration: underline;
-            }
-        }
+.Offers-container {
+  padding: 10px 20px 10px 20px;
+
+  .add-offers-btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    .add {
+      color: white;
+      margin-bottom: 10px;
+      padding: 12px;
+      width: 7%;
+      display: flex;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(48, 80, 219);
+      &:hover {
+        text-decoration: underline;
+      }
     }
-    .offers{
+  }
+  .offers {
     width: 100%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    
-    .row{
-        width: 100%;
-        display: flex;
-        gap: 44px;
-        border: none;
+
+    .row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 44px;
+      border: none;
     }
-    .offer{
+    .offer {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px;
+      gap: 40px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      border-radius: 20px;
+      .offer-image {
+        img {
+          width: 10vw;
+        }
+      }
+      .offer-details {
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
-        align-items: center;    
-        padding: 32px;
-        gap: 40px;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        border-radius: 20px;
-        .offer-image{
-            img{
-               width: 10vw;
-            }
-        }
-        .offer-details{
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-        }
-        .offer-view{
-            width: 100%;
-            background-color: rgb(48, 80, 219);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 12px;
-        }
+      }
+      .offer-view {
+        width: 100%;
+        background-color: rgb(48, 80, 219);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 12px;
+      }
     }
-}
+  }
 }
