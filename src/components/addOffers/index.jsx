@@ -15,11 +15,13 @@ const AddOffer = ({ setAddOfferClicked }) => {
 
   useClickOutside(Ref, () => setAddOfferClicked(false));
   // edited
+  console.log(image);
   const handleSubmit = async (event) => {
     event.preventDefault();
     // edited
     try {
       const payload = { image, brand, name, description, link, expire_at };
+      console.log("sdfsfd", payload);
       const formData = new FormData();
       // Append data to the FormData object
       formData.append("image", payload.image);
@@ -29,11 +31,11 @@ const AddOffer = ({ setAddOfferClicked }) => {
       formData.append("link", payload.link);
       formData.append("expire_at", payload.expire_at);
       const response = await axios.post(
-        `http://localhost:9000/offer`,
+        `http://localhost:8080/offer`,
         formData
       );
-      console.log("success");
     } catch (error) {
+      console.log("error");
       console.log(error);
     }
     // Handle form submission
@@ -82,7 +84,7 @@ const AddOffer = ({ setAddOfferClicked }) => {
 ======= */}
           <label>
             <div className="image_lable">
-              <IoCloudUploadOutline size={90} />
+              <IoCloudUploadOutline s ize={90} />
               <br></br>
               Upload Image
               <input

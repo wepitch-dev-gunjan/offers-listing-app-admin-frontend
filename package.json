@@ -15,6 +15,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
+    "formik": "^2.4.6",
     "react": "^18.2.0",
     "react-animated-login-form": "^0.1.7",
     "react-dom": "^18.2.0",
@@ -24,7 +25,8 @@
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.71.1",
     "scss": "^0.2.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
