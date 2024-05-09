@@ -3,6 +3,7 @@ import useClickOutside from "../../customHooks/useClickOutside";
 import "./style.scss";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import axios from "axios";
+import { Toast } from "bootstrap";
 
 const AddBrand = ({ setAddBrandClicked }) => {
   const [title, setTitle] = useState("");
@@ -36,6 +37,7 @@ const AddBrand = ({ setAddBrandClicked }) => {
         }
       );
       console.log("Response:", response.data);
+      setAddBrandClicked(false);
     } catch (error) {
       console.error("Error:", error);
     }

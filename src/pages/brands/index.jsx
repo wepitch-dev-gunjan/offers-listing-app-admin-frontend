@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { CiShare1 } from "react-icons/ci";
 import axios from "axios";
+import { Link } from "@mui/material";
 const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
   const [brand, setBrand] = useState([]);
   let img =
@@ -10,8 +11,13 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus,harum id provident quos voluptatem delectus optio perferendisplaceat dicta facere ducimus deserunt animi repudiandae laboreautem enim? Numquam, soluta officia?";
 
   const getOffers = async () => {
-    const { data } = await axios.get(`http://localhost:8080/brand`);
-    setBrand(data);
+console.log("kuch")
+  try{
+   const { data } = await axios.get(`http://localhost:8080/brand`);
+   setBrand(data);
+  }catch(error){
+   console.log("cant render brands" ,error)
+  }
   };
   useEffect(() => {
     getOffers();
@@ -24,7 +30,21 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
           Add Brands
         </div>
       </div>
-      <div className="brands">
+      <div className="brands-parent">
+       {brand.map((data, i) => (
+        <div className="brand-children">
+         <div className="bc-left">
+          <img src={data.logo} alt="" />
+         </div>
+         <div className="bc-right">
+          <h3>{data.title}</h3>
+          <p>{data.description.substring(0, 100)}...</p>
+          <Link to="#" ><p>Visit Brand's Page</p></Link>
+         </div>
+        </div>
+       ))}
+      </div>
+      {/* <div className="brands">
         {brand.map((data, i) => {
           return (
             <div className="col">
@@ -44,7 +64,7 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

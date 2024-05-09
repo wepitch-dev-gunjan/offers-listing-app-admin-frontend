@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
         loggedIn: !!storedToken,
         token: storedToken,
       });
-  }, [user]);
+  }, []);
   return (
     <UserContext.Provider
       value={{
