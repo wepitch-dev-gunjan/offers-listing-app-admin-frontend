@@ -17,7 +17,7 @@ const Login = ({ setLoggedIn }) => {
   let submit = (x) => {
     x.preventDefault();
     navigate("/offers");
-    setLoggedIn((prev) => !prev);
+    setLoggedIn(true);
     console.log(name, password);
   };
   return (

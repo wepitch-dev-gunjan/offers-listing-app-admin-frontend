@@ -53,11 +53,10 @@ const Navbar = ({ setLoggedIn }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const logout=()=>{
+  const logout = () => {
     navigate("/login");
     setLoggedIn((prev) => !prev);
-
-  }
+  };
 
   return (
     <div style={{ background: "white" }}>
@@ -78,7 +77,7 @@ const Navbar = ({ setLoggedIn }) => {
                 textDecoration: "none",
               }}
             >
-         Rush
+              Rush
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -136,7 +135,7 @@ const Navbar = ({ setLoggedIn }) => {
                 textDecoration: "none",
               }}
             >
-        Rush
+              Rush
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
@@ -177,7 +176,9 @@ const Navbar = ({ setLoggedIn }) => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography onClick={logout}  textAlign="center">{setting}</Typography>
+                    <Typography onClick={logout} textAlign="center">
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>

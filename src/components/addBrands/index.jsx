@@ -3,7 +3,8 @@ import useClickOutside from "../../customHooks/useClickOutside";
 import "./style.scss";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import axios from "axios";
-import { Toast } from "bootstrap";
+import CategorySelect from "../category";
+// import { Toast } from "bootstrap";
 
 const AddBrand = ({ setAddBrandClicked }) => {
   const [title, setTitle] = useState("");
@@ -54,7 +55,6 @@ const AddBrand = ({ setAddBrandClicked }) => {
               Upload Image
               <input
                 type="file"
-                // value={image}
                 onChange={(e) => setImage(e.target.files[0])}
                 style={{ display: "none" }}
               />
@@ -76,6 +76,16 @@ const AddBrand = ({ setAddBrandClicked }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+          </label>
+          <br />
+          <label>
+            category
+            {/* <input
+              type="text"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+            /> */}
+            <CategorySelect />
           </label>
           <br />
           <label>
