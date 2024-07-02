@@ -1,10 +1,10 @@
 import * as React from "react";
+import "./style.scss";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
+import { Menu } from "@mui/material";
 
 const pages = [
   {
@@ -60,7 +61,14 @@ const Navbar = ({ setLoggedIn }) => {
   };
 
   return (
-    <div style={{ background: "white" }}>
+    <div
+      style={{
+        background: "white",
+        zIndex: 100,
+        position: "fixed",
+        width: "100%",
+      }}
+    >
       <AppBar sx={{ height: "10vh" }} position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
