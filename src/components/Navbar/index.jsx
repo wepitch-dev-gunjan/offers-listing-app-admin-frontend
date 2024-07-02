@@ -54,8 +54,9 @@ const Navbar = ({ setLoggedIn }) => {
     setAnchorElUser(null);
   };
   const logout = () => {
-    navigate("/login");
+    localStorage.clear();
     setLoggedIn((prev) => !prev);
+    navigate("/login");
   };
 
   return (

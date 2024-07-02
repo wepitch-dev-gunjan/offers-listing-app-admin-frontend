@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/login";
-import { Route, Routes } from "react-router-dom";
 import Offers from "./pages/offers";
 import Brands from "./pages/brands";
 import Navbar from "./components/Navbar";
@@ -15,6 +15,15 @@ const App = () => {
   const [addBrandClicked, setAddBrandClicked] = useState(false);
   const { loggedIn, setLoggedIn } = useContext(UserContext);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [setLoggedIn]);
+
   return (
     <>
       {addOfferClicked && <AddOffer setAddOfferClicked={setAddOfferClicked} />}
@@ -24,26 +33,50 @@ const App = () => {
       </div>
       <div style={{ padding: "0px" }}>
         <Routes>
-          <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
+          <Route
+            path="/login"
+            element={
+              loggedIn ? (
+                <Navigate to="/offers" replace />
+              ) : (
+                <Login setLoggedIn={setLoggedIn} />
+              )
+            }
+          />
           <Route
             path="/offers"
             element={
-              <Offers
-                addOfferClicked={addOfferClicked}
-                setAddOfferClicked={setAddOfferClicked}
-              />
+              loggedIn ? (
+                <Offers
+                  addOfferClicked={addOfferClicked}
+                  setAddOfferClicked={setAddOfferClicked}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
           <Route
             path="/brands"
             element={
-              <Brands
-                addBrandClicked={addBrandClicked}
-                setAddBrandClicked={setAddBrandClicked}
-              />
+              loggedIn ? (
+                <Brands
+                  addBrandClicked={addBrandClicked}
+                  setAddBrandClicked={setAddBrandClicked}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
-          <Route path="/users" element={<Users />} />
+          <Route
+            path="/users"
+            element={loggedIn ? <Users /> : <Navigate to="/login" replace />}
+          />
+          <Route
+            path="/"
+            element={<Navigate to={loggedIn ? "/offers" : "/login"} replace />}
+          />
         </Routes>
       </div>
     </>
