@@ -9,11 +9,14 @@ import "./style.scss";
 import AddOffer from "./components/addOffers";
 import AddBrand from "./components/addBrands";
 import { UserContext } from "./contexts/User";
+import { BrandContext } from "./contexts/brand";
+import DeleteConfirmation from "./components/deleteBrand&Offers";
 
 const App = () => {
   const [addOfferClicked, setAddOfferClicked] = useState(false);
   const [addBrandClicked, setAddBrandClicked] = useState(false);
   const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const { isDelete, setIsDelete } = useContext(BrandContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,6 +31,13 @@ const App = () => {
     <>
       {addOfferClicked && <AddOffer setAddOfferClicked={setAddOfferClicked} />}
       {addBrandClicked && <AddBrand setAddBrandClicked={setAddBrandClicked} />}
+      {isDelete && (
+        <div className="DeleteConfirmation">
+          <div>
+            <DeleteConfirmation setIsDelete={setIsDelete} />
+          </div>{" "}
+        </div>
+      )}
       <div className="navbar" style={{ position: "sticky", top: 0 }}>
         {loggedIn && <Navbar setLoggedIn={setLoggedIn} />}
       </div>

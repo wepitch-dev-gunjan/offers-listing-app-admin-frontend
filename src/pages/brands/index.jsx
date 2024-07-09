@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import axios from "axios";
 import "./style.scss";
 import { Link } from "@mui/material";
+import { BrandContext } from "../../contexts/brand";
 
 const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
   const [brands, setBrands] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(null);
+  const { setIsDelete } = useContext(BrandContext);
 
   // Fetch brands data from API
   const getBrands = async () => {
@@ -32,6 +34,8 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
   };
 
   const handleDelete = (index) => {
+    setIsDelete((prev) => !prev);
+
     console.log("Delete", index);
     // Add your delete logic here
   };
