@@ -33,11 +33,14 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
     // Add your edit logic here
   };
 
-  const handleDelete = (index) => {
-    setIsDelete((prev) => !prev);
-
-    console.log("Delete", index);
-    // Add your delete logic here
+  const handleDelete = async (index) => {
+    try {
+      const brandId = brands[index]._id;
+      setIsDelete((prev) => !prev); // Update context state if needed
+      window.history.pushState({}, "", `/brands/${brandId}`); // Update URL with brand ID
+    } catch (error) {
+      console.error("Error deleting brand", error);
+    }
   };
 
   const handleClickOutside = (event) => {
