@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { CiShare1 } from "react-icons/ci";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Offers = ({ addOfferClicked, setAddOfferClicked }) => {
   const [offers, setOffers] = useState([]);
@@ -39,7 +40,9 @@ const Offers = ({ addOfferClicked, setAddOfferClicked }) => {
                   <p>{data.description}</p>
                 </div>
                 <div className="offer-view">
-                  View offer <CiShare1 fontWeight={400} />
+                  <Link to={`/offer/${data._id}`}>
+                    View offer <CiShare1 fontWeight={400} />
+                  </Link>
                 </div>
               </div>
             );
