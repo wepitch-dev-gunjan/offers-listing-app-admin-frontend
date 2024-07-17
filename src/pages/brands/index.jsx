@@ -19,6 +19,7 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
       console.log("Can't render brands", error);
     }
   };
+  // apis for brands
 
   useEffect(() => {
     getBrands();
