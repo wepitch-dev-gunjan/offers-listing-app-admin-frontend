@@ -4,11 +4,13 @@ import axios from "axios";
 import "./style.scss";
 import { Link } from "@mui/material";
 import { BrandContext } from "../../contexts/brand";
+import { useNavigate } from "react-router-dom";
 
 const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
   const [brands, setBrands] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const { setIsDelete } = useContext(BrandContext);
+  const navigate = useNavigate()
 
   // Fetch brands data from API
   const getBrands = async () => {
@@ -55,11 +57,16 @@ const Brands = ({ addBrandClicked, setAddBrandClicked }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownVisible]);
+  const handleTest =()=>{
+    console.log("hi");
+    navigate("/addBrand")
+
+  }
 
   return (
     <div className="Brands-container">
       <div className="add-brands-btn">
-        <div className="add" onClick={() => setAddBrandClicked(true)}>
+        <div className="add" onClick={handleTest}>
           Add Brands
         </div>
       </div>
