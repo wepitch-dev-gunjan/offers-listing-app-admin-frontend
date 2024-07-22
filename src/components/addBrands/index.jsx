@@ -1,23 +1,32 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import useClickOutside from "../../customHooks/useClickOutside";
 import "./style.scss";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import axios from "axios";
 import CategorySelect from "../category";
+import { BrandContext } from "../../contexts/brand";
 // import { Toast } from "bootstrap";
 
-const AddBrand = ({ setAddBrandClicked }) => {
+const AddBrand = () => {
+  const { addBrandClicked, setAddBrandClicked } = useContext(BrandContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const Ref = useRef(null);
   const [image, setImage] = useState(null);
+  const [category, setCategory] = useState("");  // Add a state for category
 
+  // Handle click outside to close the form
   useClickOutside(Ref, () => setAddBrandClicked(false));
 
+  // Form submission handler
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Assuming the form inputs have 'name' attributes
+    // Check that image is selected and other fields are filled
+    if (!image || !title || !description || !link || !category) {
+      console.error("All fields are required.");
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -25,6 +34,7 @@ const AddBrand = ({ setAddBrandClicked }) => {
       formData.append("description", description);
       formData.append("redirect_link", link);
       formData.append("title", title);
+      formData.append("category", category);  // Add category to form data
 
       console.log("Form Data:", formData);
 
@@ -46,8 +56,8 @@ const AddBrand = ({ setAddBrandClicked }) => {
 
   return (
     <div className="AddBrand-container">
-      <div className="add-brand">
-        <form ref={Ref} onSubmit={handleSubmit}>
+      <div className="add-brand" ref={Ref}>
+        <form onSubmit={handleSubmit}>
           <label>
             <div className="image_lable">
               <IoCloudUploadOutline size={90} />
@@ -57,35 +67,62 @@ const AddBrand = ({ setAddBrandClicked }) => {
                 type="file"
                 onChange={(e) => setImage(e.target.files[0])}
                 style={{ display: "none" }}
+                accept="image/*"  // Ensure only image files are selected
               />
             </div>
           </label>
           <br />
+          
           <label>
             Heading
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              required  // Ensure the field is required
+            />
+          </label> 
+
+
+          <label>
+            Link
+            <input
+              type="text"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              required  // Ensure the field is required
             />
           </label>
+
+
+
           <br />
           <label>
             Description
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              required  // Ensure the field is required
             />
           </label>
           <br />
+
           <label>
-            category
-            {/* <input
-              type="text"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-            /> */}
-            <CategorySelect />
+
+            store
+
+
+          </label>
+          <br></br>
+
+
+
+
+
+
+          <label>
+            Category
+            {/* <CategorySelect onChange={(selectedCategory) => setCategory(selectedCategory)} /> */}
           </label>
           <br />
           <label>
@@ -94,10 +131,9 @@ const AddBrand = ({ setAddBrandClicked }) => {
               type="text"
               value={link}
               onChange={(e) => setLink(e.target.value)}
+              required  // Ensure the field is required
             />
           </label>
-          <br />
-
           <br />
           <button className="add-btn" type="submit">
             Submit

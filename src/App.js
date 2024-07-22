@@ -15,11 +15,12 @@ import OfferDetail from "./components/offersDetails";
 
 const App = () => {
   const [addOfferClicked, setAddOfferClicked] = useState(false);
-  const [addBrandClicked, setAddBrandClicked] = useState(false);
+  const {addBrandClicked, setAddBrandClicked} = useContext(BrandContext)
   const { loggedIn, setLoggedIn } = useContext(UserContext);
   const { isDelete, setIsDelete } = useContext(BrandContext);
 
   useEffect(() => {
+    console.log("hellooooo",addBrandClicked);
     const token = localStorage.getItem("token");
     if (token) {
       setLoggedIn(true);
@@ -31,7 +32,7 @@ const App = () => {
   return (
     <>
       {addOfferClicked && <AddOffer setAddOfferClicked={setAddOfferClicked} />}
-      {addBrandClicked && <AddBrand setAddBrandClicked={setAddBrandClicked} />}
+      {/* {addBrandClicked && <AddBrand setAddBrandClicked={setAddBrandClicked} />} */}
       {isDelete && (
         <div className="DeleteConfirmation">
           <div>
@@ -79,6 +80,10 @@ const App = () => {
                 <Navigate to="/login" replace />
               )
             }
+          />
+          <Route
+          path="/addBrand"
+          element={<AddBrand/>}
           />
           <Route
             path="/users"
