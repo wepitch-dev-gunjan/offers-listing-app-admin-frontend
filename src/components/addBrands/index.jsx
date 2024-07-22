@@ -3,26 +3,30 @@ import useClickOutside from "../../customHooks/useClickOutside";
 import "./style.scss";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import axios from "axios";
-import CategorySelect from "../category";
 import { BrandContext } from "../../contexts/brand";
-// import { Toast } from "bootstrap";
 
 const AddBrand = () => {
   const { addBrandClicked, setAddBrandClicked } = useContext(BrandContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
-  const Ref = useRef(null);
+  const [stores, setStores] = useState([""]); // State for managing store inputs
   const [image, setImage] = useState(null);
-  const [category, setCategory] = useState("");  // Add a state for category
+  const [category, setCategory] = useState(""); // State for category
+  const Ref = useRef(null);
 
-  // Handle click outside to close the form
+  const categories = [
+    { value: "electronics", label: "Electronics" },
+    { value: "fashion", label: "Fashion" },
+    { value: "home-garden", label: "Home & Garden" },
+    { value: "sports", label: "Sports" },
+    { value: "toys", label: "Toys" },
+  ];
+
   useClickOutside(Ref, () => setAddBrandClicked(false));
 
-  // Form submission handler
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Check that image is selected and other fields are filled
     if (!image || !title || !description || !link || !category) {
       console.error("All fields are required.");
       return;
@@ -30,20 +34,21 @@ const AddBrand = () => {
 
     try {
       const formData = new FormData();
-      formData.append("logo", image); // Assuming 'image' is a file input
+      formData.append("logo", image);
       formData.append("description", description);
       formData.append("redirect_link", link);
       formData.append("title", title);
-      formData.append("category", category);  // Add category to form data
-
-      console.log("Form Data:", formData);
+      formData.append("category", category);
+      stores.forEach((store, index) => {
+        formData.append(`store[${index}]`, store);
+      });
 
       const response = await axios.post(
         `http://localhost:8080/brand`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Correct content type
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -54,6 +59,19 @@ const AddBrand = () => {
     }
   };
 
+  const addStoreInput = () => {
+    setStores([...stores, ""]);
+  };
+
+  const removeStoreInput = (index) => {
+    setStores(stores.filter((_, i) => i !== index));
+  };
+
+  const handleStoreChange = (index, value) => {
+    const newStores = stores.map((store, i) => (i === index ? value : store));
+    setStores(newStores);
+  };
+
   return (
     <div className="AddBrand-container">
       <div className="add-brand" ref={Ref}>
@@ -61,40 +79,41 @@ const AddBrand = () => {
           <label>
             <div className="image_lable">
               <IoCloudUploadOutline size={90} />
-              <br></br>
+              <br />
               Upload Image
               <input
                 type="file"
                 onChange={(e) => setImage(e.target.files[0])}
                 style={{ display: "none" }}
-                accept="image/*"  // Ensure only image files are selected
+                accept="image/*"
               />
             </div>
           </label>
           <br />
-          
-          <label>
-            Heading
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required  // Ensure the field is required
-            />
-          </label> 
 
+          <div className="hadinglink">
+            <div className="hading">
+              <label>hading</label>
 
-          <label>
-            Link
-            <input
-              type="text"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              required  // Ensure the field is required
-            />
-          </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required // Ensure the field is required
+              />
+            </div>
 
+            <div className="link">
+              <label>Link</label>
 
+              <input
+                type="text"
+                value={link}
+                onChange={(e) => setTitle(e.target.value)}
+                required // Ensure the field is required
+              />
+            </div>
+          </div>
 
           <br />
           <label>
@@ -102,38 +121,62 @@ const AddBrand = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required  // Ensure the field is required
+              required
+              className="form-control"
             />
           </label>
           <br />
 
-          <label>
+          <div className="store">
+            <label>Store</label>
+            {stores.map((store, index) => (
+              <div key={index} className="form-group storee">
+                <input
+                  type="text"
+                  value={store}
+                  onChange={(e) => handleStoreChange(index, e.target.value)}
+                  required
+                  className="form-control"
+                />
+                <span
+                  className="iconn"
+                  onClick={() => removeStoreInput(index)}
+                  style={{ cursor: "pointer" }}
+                >
+                  🗑️
+                </span>
+              </div>
+            ))}
+            <span
+              className="iconn"
+              onClick={addStoreInput}
+              style={{ cursor: "pointer" }}
+            >
+              +
+            </span>
+          </div>
 
-            store
-
-
-          </label>
-          <br></br>
-
-
-
-
-
+          <br />
 
           <label>
             Category
-            {/* <CategorySelect onChange={(selectedCategory) => setCategory(selectedCategory)} /> */}
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+              className="form-control  ct"
+            >
+              <option value="" disabled>
+                Select a category
+              </option>
+              {categories.map((cat) => (
+                <option key={cat.value} value={cat.value}>
+                  {cat.label}
+                </option>
+              ))}
+            </select>
           </label>
-          <br />
-          <label>
-            Link
-            <input
-              type="text"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              required  // Ensure the field is required
-            />
-          </label>
+
           <br />
           <button className="add-btn" type="submit">
             Submit
