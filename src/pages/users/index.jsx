@@ -227,7 +227,7 @@ const Users = () => {
           <div class="col">{user.email}</div>
           <div class="col">{user.gender}</div>
           <div class="col">{user.phone_no}</div>
-          <div class="col">{user.offers}</div>
+          <div class="col"></div>
         </div>
       ))}
     </div>
