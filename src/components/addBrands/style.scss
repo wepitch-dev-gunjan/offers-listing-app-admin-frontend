@@ -24,6 +24,33 @@
       border: dotted;
       border-radius: 20px;
     }
+
+    .hadinglink{
+      display: flex;
+      justify-content: space-between;
+      
+    
+  
+    
+
+
+    }
+    
+   
+    
+  
+    .storee{
+         display: inline;
+
+    }
+    .iconn{
+      align-items: end;
+    }
+
+
+      
+    
+    
     form {
       display: flex;
       flex-direction: column;
@@ -45,8 +72,15 @@
           border-bottom: 1px solid black;
         }
       }
+
+
+
+
+
+
       .add-btn {
         padding: 12px;
+        width: 7%;
         border: none;
         border-radius: 20px;
         color: white;

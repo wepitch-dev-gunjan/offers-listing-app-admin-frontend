@@ -13,6 +13,7 @@ import { BrandContext } from "./contexts/brand";
 import DeleteConfirmation from "./components/deleteBrand&Offers";
 import OfferDetail from "./components/offersDetails";
 
+
 const App = () => {
   const [addOfferClicked, setAddOfferClicked] = useState(false);
   const {addBrandClicked, setAddBrandClicked} = useContext(BrandContext)
@@ -29,8 +30,15 @@ const App = () => {
     }
   }, [setLoggedIn]);
 
+
+
+  
+
   return (
     <>
+      
+
+  
       {addOfferClicked && <AddOffer setAddOfferClicked={setAddOfferClicked} />}
       {/* {addBrandClicked && <AddBrand setAddBrandClicked={setAddBrandClicked} />} */}
       {isDelete && (
@@ -68,7 +76,7 @@ const App = () => {
               )
             }
           />
-          <Route
+           <Route
             path="/brands"
             element={
               loggedIn ? (
