@@ -10,30 +10,24 @@ const AddBrand = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
-  const [stores, setStores] = useState([""]); // State for managing store inputs
+  const [stores, setStores] = useState([""]);
   const [image, setImage] = useState(null);
-  // State for category
-  const [subCategory, setSubCategory] = useState(""); // State for subcategory
-  const [subCategories, setSubCategories] = useState([]); // State for storing subcategories
-  const [showSubCategory, setShowSubCategory] = useState(false); // State for showing subcategory dropdown
+  const [category, setCategory] = useState(""); // Single category selection
+  const [categories, setCategories] = useState([]); // List of categories
+  const [subCategory, setSubCategory] = useState("");
+  const [subCategories, setSubCategories] = useState([]);
+  const [showSubCategory, setShowSubCategory] = useState(false);
   const Ref = useRef(null);
 
-     const[category,setCategory]=useState([]);
-  
-
-
-
-  const fetchCategory = async () => {
+  const fetchCategories = async () => {
     try {
       const { data } = await axios.get(`http://localhost:8080/category`);
-      setCategory(data);
-      console.log("name", data);
+      setCategories(data);
+      console.log("Categories:", data);
     } catch (error) {
-      console.error("Error fetching subcategories:", error);
+      console.error("Error fetching categories:", error);
     }
   };
-
- 
 
   useClickOutside(Ref, () => setAddBrandClicked(false));
 
@@ -84,18 +78,10 @@ const AddBrand = () => {
     const newStores = stores.map((store, i) => (i === index ? value : store));
     setStores(newStores);
   };
-  useEffect(()=>{
-    fetchCategory()
-  },[])
 
-  // const handleShowSubCategory = () => {
-  //   if (category) {
-  //     fetchCategory();
-  //     // setShowCategory(true);
-  //   } else {
-  //     console.error("Please select a category first.");
-  //   }
-  // };
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const handleDeleteSubCategory = () => {
     setSubCategory("");
@@ -107,7 +93,7 @@ const AddBrand = () => {
       <div className="add-brand" ref={Ref}>
         <form onSubmit={handleSubmit}>
           <label>
-            <div className="image_lable">
+            <div className="image_label">
               <IoCloudUploadOutline size={90} />
               <br />
               Upload Image
@@ -121,26 +107,24 @@ const AddBrand = () => {
           </label>
           <br />
 
-          <div className="hadinglink">
-            <div className="hading">
-              <label>hading</label>
-
+          <div className="headingLink">
+            <div className="heading">
+              <label>Heading</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                required // Ensure the field is required
+                required
               />
             </div>
 
             <div className="link">
               <label>Link</label>
-
               <input
                 type="text"
                 value={link}
-                onChange={(e) => setTitle(e.target.value)}
-                required // Ensure the field is required
+                onChange={(e) => setLink(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -168,13 +152,15 @@ const AddBrand = () => {
                   required
                   className="form-control"
                 />
-                <span
-                  className="iconn"
-                  onClick={() => removeStoreInput(index)}
-                  style={{ cursor: "pointer" }}
-                >
-                  🗑️
-                </span>
+                {index !== 0 && (
+                  <span
+                    className="iconn"
+                    onClick={() => removeStoreInput(index)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    🗑️
+                  </span>
+                )}
               </div>
             ))}
             <span
@@ -198,8 +184,10 @@ const AddBrand = () => {
                   required
                   className="form-control ct"
                 >
-                
-                  {category.map((category) => (
+                  <option value="" disabled>
+                    Select a category
+                  </option>
+                  {categories.map((category) => (
                     <option key={category.value} value={category.name}>
                       {category.name}
                     </option>
@@ -267,8 +255,3 @@ const AddBrand = () => {
 };
 
 export default AddBrand;
-
-
-
-
-
