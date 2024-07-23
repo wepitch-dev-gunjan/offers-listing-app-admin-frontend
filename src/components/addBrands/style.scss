@@ -28,15 +28,43 @@
     .hadinglink {
       display: flex;
       justify-content: space-between;
+      
+    
+  
+    
+
+
     }
-    .storee {
-      display: inline;
+   
+   
+    
+  
+    .storee{
+         display: inline;
+
     }
     .iconn {
       align-items: end;
     }
 
-    form {
+   
+
+
+    .category-subcategory {
+      display: flex;
+      gap: 20px; // Adjust the gap as needed
+      align-items: flex-end; // Aligns items to the bottom
+    }
+    
+    .iconn {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      padding: 0;
+      margin-left: 10px;
+    }
+  
+      form {
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -57,6 +85,13 @@
           border-bottom: 1px solid black;
         }
       }
+
+
+     
+
+
+
+
 
       .add-btn {
         padding: 12px;

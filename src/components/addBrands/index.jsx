@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import useClickOutside from "../../customHooks/useClickOutside";
 import "./style.scss";
 import { IoCloudUploadOutline } from "react-icons/io5";
@@ -12,16 +12,28 @@ const AddBrand = () => {
   const [link, setLink] = useState("");
   const [stores, setStores] = useState([""]); // State for managing store inputs
   const [image, setImage] = useState(null);
-  const [category, setCategory] = useState(""); // State for category
+  // State for category
+  const [subCategory, setSubCategory] = useState(""); // State for subcategory
+  const [subCategories, setSubCategories] = useState([]); // State for storing subcategories
+  const [showSubCategory, setShowSubCategory] = useState(false); // State for showing subcategory dropdown
   const Ref = useRef(null);
 
-  const categories = [
-    { value: "electronics", label: "Electronics" },
-    { value: "fashion", label: "Fashion" },
-    { value: "home-garden", label: "Home & Garden" },
-    { value: "sports", label: "Sports" },
-    { value: "toys", label: "Toys" },
-  ];
+     const[category,setCategory]=useState([]);
+  
+
+
+
+  const fetchCategory = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:8080/category`);
+      setCategory(data);
+      console.log("name", data);
+    } catch (error) {
+      console.error("Error fetching subcategories:", error);
+    }
+  };
+
+ 
 
   useClickOutside(Ref, () => setAddBrandClicked(false));
 
@@ -39,6 +51,7 @@ const AddBrand = () => {
       formData.append("redirect_link", link);
       formData.append("title", title);
       formData.append("category", category);
+      formData.append("subcategory", subCategory);
       stores.forEach((store, index) => {
         formData.append(`store[${index}]`, store);
       });
@@ -70,6 +83,23 @@ const AddBrand = () => {
   const handleStoreChange = (index, value) => {
     const newStores = stores.map((store, i) => (i === index ? value : store));
     setStores(newStores);
+  };
+  useEffect(()=>{
+    fetchCategory()
+  },[])
+
+  // const handleShowSubCategory = () => {
+  //   if (category) {
+  //     fetchCategory();
+  //     // setShowCategory(true);
+  //   } else {
+  //     console.error("Please select a category first.");
+  //   }
+  // };
+
+  const handleDeleteSubCategory = () => {
+    setSubCategory("");
+    setShowSubCategory(false);
   };
 
   return (
@@ -158,24 +188,73 @@ const AddBrand = () => {
 
           <br />
 
-          <label>
-            Category
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-              className="form-control  ct"
-            >
-              <option value="" disabled>
-                Select a category
-              </option>
-              {categories.map((cat) => (
-                <option key={cat.value} value={cat.value}>
-                  {cat.label}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="category-subcategory">
+            <div>
+              <label>
+                Category
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  required
+                  className="form-control ct"
+                >
+                
+                  {category.map((category) => (
+                    <option key={category.value} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button
+                type="button"
+                className="iconn"
+                // onClick={handleShowSubCategory}
+                style={{ cursor: "pointer" }}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                className="iconn"
+                onClick={handleDeleteSubCategory}
+                style={{ cursor: "pointer" }}
+              >
+                🗑️
+              </button>
+            </div>
+
+            {showSubCategory && subCategories.length > 0 && (
+              <div>
+                <label>
+                  Subcategory
+                  <select
+                    value={subCategory}
+                    onChange={(e) => setSubCategory(e.target.value)}
+                    required
+                    className="form-control ct"
+                  >
+                    <option value="" disabled>
+                      Select a subcategory
+                    </option>
+                    {subCategories.map((subCategory) => (
+                      <option key={subCategory.value} value={subCategory.value}>
+                        {subCategory.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  type="button"
+                  className="iconn"
+                  onClick={handleDeleteSubCategory}
+                  style={{ cursor: "pointer" }}
+                >
+                  🗑️
+                </button>
+              </div>
+            )}
+          </div>
 
           <br />
           <button className="add-btn" type="submit">
@@ -188,3 +267,8 @@ const AddBrand = () => {
 };
 
 export default AddBrand;
+
+
+
+
+
